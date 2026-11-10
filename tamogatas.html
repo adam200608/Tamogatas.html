@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Támogatás | Studium Generale</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #009EDC; }
+  #sg-frame { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; display: block; transform-origin: 0 0; visibility: hidden; }
+  #sg-src { display: none; }
+</style>
+</head>
+<body>
+<!--
+  WIX-DOBOZ ARÁNYOS KITÖLTÉSE
+  Ezen a Wix-oldalon a HTML-beágyazás magassága a képernyő szélességével arányosan nő
+  (asztali nézet: ~5,6 × szélesség, mobil: ~12,7 × szélesség), a lap tartalma viszont nem –
+  ezért maradt üres sáv a lábléc fölött széles képernyőn, és vágódott le a lap alja keskenyen.
+  Ez a keret megkeresi azt a tördelési szélességet, amelynél a lap pontosan kitölti a dobozt,
+  és a lapot a doboz szélességére nagyítja/kicsinyíti – ugyanúgy, ahogy a Wix a saját elemeit.
+  A lap kódja változatlanul lent, az „sg-src” blokkban van (a DOCTYPE sortól a /html zárótagig);
+  ott szerkeszthető. A keret többi részét ne módosítsd.
+-->
+<iframe id="sg-frame" title="Támogatás | Studium Generale" scrolling="no"></iframe>
+<xmp id="sg-src">
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Támogatás | Studium Generale</title>
+
+<!-- Fonts + Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  /* ============================================
+     SG TÁMOGATÁS — combined subpage (light theme)
+     Palette: #009EDC / #231F20 / #F0F0FF
+     Self-contained Wix HTML embed
+     Desktop view unchanged — mobile handled via
+     media queries + touch-only queries below.
+     ============================================ */
+
+  :root {
+    --brand:      #009EDC;
+    --brand-deep: #0079ab;
+    --ink:        #231F20;
+    --bg:         #F0F0FF;
+    --surface:    #ffffff;
+    --gradient:   linear-gradient(135deg, #009EDC 0%, #0079ab 100%);
+    --line:       rgba(35,31,32,.10);
+    --line-soft:  rgba(35,31,32,.06);
+    --ink-70:     rgba(35,31,32,.70);
+    --ink-55:     rgba(35,31,32,.55);
+    --ink-40:     rgba(35,31,32,.40);
+    --brand-dim:  rgba(0,158,220,.45);
+    --shadow-sm:  0 10px 30px rgba(35,31,32,.07);
+    --shadow-md:  0 22px 55px rgba(35,31,32,.10);
+    --disp:       'Archivo', 'Montserrat', sans-serif;
+    --body:       'Montserrat', sans-serif;
+    --sg-watermark: url(https://www.studiumgenerale.hu/wp-content/uploads/SG_logo_single_color.png);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  body { font-family: var(--body); color: var(--ink); line-height: 1.65; font-size: 16px; }
+  img { max-width: 100%; }
+  .section { scroll-margin-top: 90px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .sg-reveal, .sg-hero-el { opacity: 1 !important; transform: none !important; }
+    .hero::before { opacity: .16 !important; transform: none !important; }
+  }
+
+  @keyframes sg-watermark-in {
+    0%   { opacity:0;   transform:scale(.96); }
+    60%  { opacity:.2;  transform:scale(1); }
+    100% { opacity:.16; transform:scale(1.02); }
+  }
+  @keyframes sg-hero-fadein {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ══ TYPE SYSTEM ══ */
+  .eyebrow {
+    font-family: var(--disp);
+    font-weight: 700; font-size: .74rem;
+    letter-spacing: .32em; text-transform: uppercase;
+    color: var(--brand);
+    display: inline-flex; align-items: center; gap: 14px;
+    margin: 0 0 18px;
+  }
+  .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--brand); flex-shrink: 0; }
+
+  .section-title {
+    font-family: var(--disp);
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1.02; letter-spacing: .015em;
+    text-transform: uppercase;
+    margin: 0 0 20px; color: var(--ink);
+    text-align: center; max-width: 920px;
+  }
+  .section-lead {
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    color: var(--ink-70);
+    max-width: 720px; text-align: center;
+    margin: 0 0 60px; font-weight: 600;
+  }
+  .highlight { color: var(--brand); }
+
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--disp);
+    font-weight: 800; font-size: .92rem;
+    letter-spacing: .08em; text-transform: uppercase;
+    background: var(--brand); color: #fff;
+    padding: 16px 30px; border-radius: 999px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 10px 26px rgba(0,158,220,.28);
+    white-space: nowrap;
+  }
+  .cta-btn i { font-size: .85em; transition: transform .25s ease; }
+  .cta-btn:hover { background: var(--ink); transform: translateY(-2px); box-shadow: 0 14px 30px rgba(35,31,32,.22); }
+  .cta-btn:hover i { transform: translateX(4px); }
+  .cta-btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); box-shadow: none; }
+  .cta-btn.ghost:hover { border-color: var(--brand); color: var(--brand); background: transparent; box-shadow: none; }
+
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+
+  .sg-reveal {
+    opacity: 0; transform: translateY(26px);
+    transition: opacity .7s ease var(--sg-delay, 0s), transform .7s ease var(--sg-delay, 0s);
+  }
+  .sg-reveal.is-visible { opacity: 1; transform: none; }
+  .sg-hero-el { opacity: 0; animation: sg-hero-fadein .75s ease forwards; animation-delay: var(--sg-delay, 0s); }
+
+  /* ══ FIXED OVERLAYS ══ */
+  #sg-progress-bar {
+    position: fixed; top: 0; left: 0;
+    width: 0%; height: 3px;
+    background: var(--gradient);
+    z-index: 9999; pointer-events: none;
+    transition: width .08s linear;
+  }
+  #sg-toast {
+    position: fixed; bottom: 104px; left: 50%;
+    transform: translateX(-50%) translateY(14px);
+    background: var(--ink); color: #fff;
+    border: 1.5px solid rgba(255,255,255,.14);
+    padding: 11px 22px; border-radius: 100px;
+    font-family: var(--disp); font-size: .8rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    z-index: 9000; opacity: 0; pointer-events: none;
+    transition: opacity .3s ease, transform .3s ease;
+    box-shadow: 0 12px 36px rgba(35,31,32,.35);
+    display: flex; align-items: center; gap: 9px; white-space: nowrap;
+  }
+  #sg-toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #sg-toast i { color: var(--brand); }
+
+  #sg-sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 8000;
+    display: flex; justify-content: center;
+    padding: 0 20px 20px;
+    pointer-events: none;
+    transform: translateY(130%);
+    transition: transform .45s cubic-bezier(.34,1.4,.64,1);
+  }
+  #sg-sticky-cta.is-visible { transform: translateY(0); pointer-events: auto; }
+  .sg-sticky-inner {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 9px 9px 9px 24px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 12px 44px rgba(35,31,32,.16);
+    max-width: 560px; width: 100%;
+  }
+  .sg-sticky-label {
+    font-family: var(--disp); font-size: .68rem; font-weight: 700;
+    letter-spacing: .28em; text-transform: uppercase;
+    color: var(--ink-40); white-space: nowrap; flex-shrink: 0;
+  }
+  .sg-sticky-acct {
+    font-family: var(--disp); font-size: .85rem; font-weight: 900;
+    letter-spacing: .04em; color: var(--ink); cursor: pointer;
+    background: transparent; border: none;
+    border-bottom: 1px dashed var(--brand-dim);
+    padding: 0; flex-grow: 1; text-align: left;
+    transition: color .2s ease;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sg-sticky-acct:hover { color: var(--brand); }
+  .sg-sticky-btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--brand); color: #fff;
+    font-family: var(--disp); font-weight: 800; font-size: .78rem;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 12px 18px; border-radius: 100px; text-decoration: none;
+    transition: background .25s, transform .25s;
+    white-space: nowrap;
+  }
+  .sg-sticky-btn:hover { background: var(--ink); transform: scale(1.04); }
+
+  #sg-to-top {
+    position: fixed; bottom: 92px; right: 22px;
+    width: 46px; height: 46px; border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--surface); color: var(--brand); font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 7000;
+    opacity: 0; transform: translateY(10px) scale(.84); pointer-events: none;
+    transition: opacity .35s ease, transform .35s ease, border-color .25s, background .25s, color .25s;
+    box-shadow: var(--shadow-sm);
+  }
+  #sg-to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+  #sg-to-top:hover { background: var(--brand); border-color: var(--brand); color: #fff; transform: translateY(-3px); }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: var(--gradient);
+    padding: 110px 20px 90px;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    position: relative; isolation: isolate; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: var(--sg-watermark);
+    background-repeat: no-repeat;
+    background-position: center 30%;
+    background-size: min(520px, 62vw);
+    opacity: 0; transform: scale(.96);
+    z-index: -1; pointer-events: none;
+  }
+  .hero.sg-animate::before { animation: sg-watermark-in 1.2s ease forwards; }
+  .hero .eyebrow { color: rgba(255,255,255,.95); }
+  .hero .eyebrow::before { background: rgba(255,255,255,.95); }
+  .hero .eyebrow::after { content: ""; width: 26px; height: 2px; background: rgba(255,255,255,.95); flex-shrink: 0; }
+  .hero h1 {
+    font-family: var(--disp);
+    font-size: clamp(2.8rem, 9vw, 6.2rem);
+    font-weight: 900; margin: 0;
+    text-transform: uppercase; letter-spacing: .015em;
+    line-height: .96; color: #fff;
+    text-shadow: 0 16px 40px rgba(0,86,120,.35);
+  }
+  .hero .hero-sub {
+    font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+    margin: 26px 0 0; font-weight: 700;
+    max-width: 760px; color: #fff; opacity: .96;
+  }
+  .hero .hero-ctas { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  /* Buttons invert on the brand-colored hero */
+  .hero .cta-btn { background: #fff; color: var(--brand); box-shadow: 0 12px 30px rgba(0,86,120,.28); }
+  .hero .cta-btn:hover { background: var(--ink); color: #fff; }
+  .hero .cta-btn.ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.55); box-shadow: none; }
+  .hero .cta-btn.ghost:hover { background: rgba(255,255,255,.12); color: #fff; border-color: #fff; }
+
+  /* ── STAT STRIP ── */
+  .stat-strip {
+    background: var(--ink); padding: 54px 20px;
+    display: flex; justify-content: center;
+  }
+  .stat-strip-inner {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 30px; width: 100%; max-width: 1200px;
+  }
+  .stat-item { text-align: center; }
+  .stat-item .num {
+    font-family: var(--disp); font-weight: 900;
+    font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+    line-height: 1; color: var(--brand); letter-spacing: .01em;
+  }
+  .stat-item .lbl {
+    margin-top: 10px;
+    font-family: var(--disp); font-size: .72rem; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(240,240,255,.6);
+  }
+
+  /* ── NAV ── */
+  .nav-wrapper { background: var(--bg); padding: 40px 20px 46px; display: flex; justify-content: center; }
+  .nav-buttons {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; width: 100%; max-width: 1100px;
+  }
+  .nav-btn {
+    background: var(--surface);
+    padding: 18px 24px; border-radius: 999px;
+    text-align: center; text-decoration: none; color: var(--ink);
+    font-family: var(--disp);
+    font-weight: 700; text-transform: uppercase;
+    font-size: .82rem; letter-spacing: .1em;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    border: 1px solid var(--line);
+    min-height: 56px; box-shadow: var(--shadow-sm);
+    transition: transform .28s ease, background .28s ease, border-color .28s ease, color .28s ease;
+  }
+  .nav-btn i { font-size: 1.05rem; color: var(--brand); transition: color .28s ease; }
+  .nav-btn:hover, .nav-btn.is-active { background: var(--brand); border-color: var(--brand); color: #fff; transform: translateY(-2px); }
+  .nav-btn:hover i, .nav-btn.is-active i { color: #fff; }
+
+  /* ══ SECTIONS ══ */
+  .section { padding: 110px 5%; width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .section.alt { background: var(--surface); }
+
+  /* ── BENEFIT LADDER (Vállalatoknak) ── */
+  .ladder {
+    width: 100%; max-width: 860px;
+    display: flex; flex-direction: column;
+    margin-bottom: 70px;
+    border-left: 2px solid var(--brand-dim);
+  }
+  .ladder-item {
+    position: relative;
+    padding: 22px 24px 22px 34px;
+    display: flex; align-items: center; gap: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .ladder-item:last-child { border-bottom: none; }
+  .ladder-item::before {
+    content: "";
+    position: absolute; left: -6px; top: 50%;
+    width: 10px; height: 10px; border-radius: 999px;
+    background: var(--bg);
+    border: 2px solid var(--brand);
+    transform: translateY(-50%);
+  }
+  .ladder-item i {
+    color: var(--brand); font-size: 1.15rem;
+    width: 30px; flex-shrink: 0; text-align: center;
+  }
+  .ladder-item .txt { font-weight: 600; font-size: 1.02rem; }
+  .ladder-item.top {
+    background: linear-gradient(90deg, rgba(0,158,220,.10), transparent 70%);
+  }
+  .ladder-item.top .txt { font-weight: 800; }
+  .ladder-note {
+    font-family: var(--disp);
+    font-size: .7rem; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-40);
+    padding: 16px 24px 0 34px;
+  }
+
+  /* ── TAX CARDS ── */
+  .duo-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 26px; width: 100%; max-width: 1000px;
+  }
+  .tax-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--ink);
+    border-radius: 22px;
+    padding: 40px 36px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .tax-card.best { border: 1px solid var(--brand-dim); border-top: 3px solid var(--brand); box-shadow: 0 0 0 1px rgba(0,158,220,.15), 0 22px 55px rgba(0,158,220,.14); }
+  .tax-card .pct {
+    font-family: var(--disp); font-weight: 900;
+    font-size: clamp(3rem, 7vw, 4.6rem);
+    line-height: 1; color: var(--brand);
+  }
+  .tax-card .pct-lbl {
+    font-family: var(--disp); font-weight: 700;
+    font-size: .72rem; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--ink-55);
+    margin: 10px 0 20px;
+  }
+  .tax-card h3 {
+    font-family: var(--disp); font-weight: 900;
+    font-size: 1.1rem; letter-spacing: .05em; text-transform: uppercase;
+    margin: 0 0 14px; color: var(--ink);
+  }
+  .tax-card p { margin: 0; font-size: .98rem; font-weight: 600; color: var(--ink-70); }
+  .legal-note {
+    margin-top: 26px;
+    font-size: .8rem; font-weight: 600;
+    color: var(--ink-40);
+    max-width: 760px; text-align: center;
+  }
+
+  /* ── ACCOUNT PANEL (signature — dark on light) ── */
+  .acct-panel {
+    margin-top: 64px;
+    background: var(--ink);
+    border-radius: 28px;
+    padding: 40px 52px 36px;
+    display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+  }
+  .acct-panel .acct-label {
+    font-family: var(--disp); font-size: .72rem; font-weight: 700;
+    letter-spacing: .32em; text-transform: uppercase; color: var(--brand);
+  }
+  .acct-panel .acct-number {
+    font-family: var(--disp);
+    font-size: clamp(1.15rem, 4vw, 2.1rem);
+    font-weight: 900; letter-spacing: .04em; line-height: 1.2;
+    color: #fff; cursor: pointer;
+    border-bottom: 2px dashed rgba(0,158,220,.5);
+    padding-bottom: 6px;
+    transition: color .25s ease, border-color .25s ease;
+    word-break: break-all;
+  }
+  .acct-panel .acct-number:hover { color: var(--brand); border-color: var(--brand); }
+  .acct-panel .acct-owner {
+    font-size: .82rem; font-weight: 700;
+    letter-spacing: .06em; color: rgba(240,240,255,.6);
+  }
+  .acct-panel .copy-hint {
+    font-size: .66rem; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(240,240,255,.4); font-weight: 700;
+  }
+
+  /* ── PRODUCT SUPPORT STRIP ── */
+  .info-band {
+    margin-top: 26px;
+    width: 100%; max-width: 1000px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 18px;
+    padding: 28px 32px;
+    display: flex; gap: 20px; align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+  .info-band i { color: var(--brand); font-size: 1.4rem; margin-top: 4px; flex-shrink: 0; }
+  .info-band h4 {
+    font-family: var(--disp); font-weight: 900;
+    font-size: .95rem; letter-spacing: .06em; text-transform: uppercase;
+    margin: 0 0 8px; color: var(--ink);
+  }
+  .info-band p { margin: 0; font-size: .95rem; font-weight: 600; color: var(--ink-70); }
+
+  /* ── ÉAC ── */
+  .eac-wrap {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 40px;
+    width: 100%; max-width: 1100px;
+    align-items: stretch;
+  }
+  .eac-text { display: flex; flex-direction: column; justify-content: center; }
+  .eac-text p { margin: 0 0 18px; font-size: 1.02rem; font-weight: 600; color: var(--ink-70); }
+  .eac-text p:last-of-type { margin-bottom: 28px; }
+  .eac-side {
+    background: var(--gradient);
+    border-radius: 22px;
+    padding: 40px 36px;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: 0 22px 55px rgba(0,158,220,.22);
+  }
+  .eac-side .big {
+    font-family: var(--disp); font-weight: 900;
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    line-height: 1; color: #fff;
+  }
+  .eac-side .big-lbl {
+    font-family: var(--disp); font-weight: 700;
+    font-size: .74rem; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.85);
+    margin: 12px 0 26px;
+  }
+  .eac-side ul { list-style: none; margin: 0; padding: 0; }
+  .eac-side li {
+    font-weight: 700; font-size: .96rem; color: #fff;
+    padding: 10px 0 10px 26px; position: relative;
+    border-bottom: 1px solid rgba(255,255,255,.22);
+  }
+  .eac-side li:last-child { border-bottom: none; }
+  .eac-side li::before {
+    content: "\2192";
+    position: absolute; left: 0; font-weight: 900; color: #fff;
+  }
+  .subject-tags { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 28px; }
+  .subject-tag {
+    font-family: var(--disp); font-weight: 700;
+    font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+    padding: 8px 16px; border-radius: 999px;
+    color: var(--brand);
+    border: 1.5px solid var(--brand-dim);
+  }
+
+  /* ── PARENTS: 3 ways grid ── */
+  .ways-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 26px;
+    width: 100%; max-width: 1100px;
+  }
+  .way-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 38px 32px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .way-card:hover { transform: translateY(-6px); border-color: var(--brand-dim); box-shadow: var(--shadow-md); }
+  .way-card .icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    background: rgba(0,158,220,.1);
+    border: 1px solid rgba(0,158,220,.28);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand); font-size: 1.4rem;
+    margin-bottom: 24px;
+  }
+  .way-card h3 {
+    font-family: var(--disp); font-weight: 900;
+    font-size: 1.1rem; letter-spacing: .05em; text-transform: uppercase;
+    margin: 0 0 12px; color: var(--ink);
+  }
+  .way-card p { margin: 0 0 22px; font-size: .96rem; font-weight: 600; color: var(--ink-70); flex-grow: 1; }
+  .way-card p strong { color: var(--ink); }
+  .way-link {
+    font-family: var(--disp); font-weight: 800;
+    font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--brand); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .way-link i { transition: transform .25s ease; font-size: .85em; }
+  .way-link:hover i { transform: translateX(4px); }
+
+  /* ── THANK YOU / SUPPORTERS ── */
+  .thanks-quote {
+    max-width: 820px;
+    text-align: center;
+    font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+    font-weight: 700; font-style: italic;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0 0 60px;
+  }
+  .thanks-quote .q-mark { color: var(--brand); font-size: 1.4em; }
+  /* 68 logó: sűrűbb rács, kisebb cellák, hogy a szekció ne nyúljon túl hosszúra */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+    width: 100%; max-width: 1100px;
+  }
+  .logo-cell {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    height: 100px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px 18px;
+    box-shadow: 0 6px 18px rgba(35,31,32,.05);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    overflow: hidden;
+  }
+  .logo-cell:hover { transform: translateY(-4px); border-color: var(--brand-dim); box-shadow: var(--shadow-sm); }
+  .logo-cell img {
+    display: block;
+    max-width: 100%; max-height: 64px;
+    width: auto; height: auto;
+    object-fit: contain;
+  }
+
+  /* ── CONTACT CTA BAND ── */
+  .contact-band {
+    width: 100%; max-width: 1100px;
+    margin-top: 80px;
+    background: var(--gradient);
+    border-radius: 26px;
+    padding: 56px 48px;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    box-shadow: 0 26px 60px rgba(0,158,220,.22);
+  }
+  .contact-band h3 {
+    font-family: var(--disp); font-weight: 900;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+    letter-spacing: .02em; text-transform: uppercase;
+    margin: 0 0 14px; color: #fff;
+  }
+  .contact-band p { margin: 0 0 30px; font-weight: 600; max-width: 560px; opacity: .96; color: #fff; }
+  .contact-band .cta-btn { background: var(--ink); color: #fff; box-shadow: 0 12px 30px rgba(35,31,32,.3); }
+  .contact-band .cta-btn:hover { background: #fff; color: var(--ink); }
+  .contact-band .cta-btn i { color: var(--brand); }
+  .contact-band .cta-btn:hover i { color: var(--brand); }
+
+  /* ── KAPCSOLATI ŰRLAPOK ── */
+  .sg-form-card {
+    width: 100%; max-width: 1100px;
+    margin-top: 70px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--brand);
+    border-radius: 26px;
+    padding: 48px 48px 44px;
+    display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px;
+    box-shadow: var(--shadow-md);
+    --field-bg: var(--bg);
+  }
+  .sg-form-card.on-alt { background: var(--bg); --field-bg: var(--surface); }
+  .sg-form-intro { display: flex; flex-direction: column; }
+  .sg-form-intro .eyebrow { margin-bottom: 14px; }
+  .sg-form-intro h3 {
+    font-family: var(--disp); font-weight: 900;
+    font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1;
+    letter-spacing: .02em; text-transform: uppercase;
+    margin: 0 0 16px; color: var(--ink);
+  }
+  .sg-form-intro p { margin: 0 0 24px; font-size: .98rem; font-weight: 600; color: var(--ink-70); }
+  .sg-form-mail {
+    margin-top: auto;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: .92rem; color: var(--ink);
+    text-decoration: none; word-break: break-all;
+    transition: color .25s ease;
+  }
+  .sg-form-mail i { color: var(--brand); }
+  .sg-form-mail:hover { color: var(--brand); }
+  .sg-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; margin: 0; }
+  .sg-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .sg-field.full { grid-column: 1 / -1; }
+  .sg-field label {
+    font-family: var(--disp); font-weight: 700;
+    font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-55);
+  }
+  .sg-field label .req { color: var(--brand); }
+  .sg-field input, .sg-field textarea {
+    width: 100%;
+    font-family: var(--body); font-size: 16px; font-weight: 600; color: var(--ink);
+    background: var(--field-bg);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 13px 16px;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    -webkit-appearance: none; appearance: none;
+  }
+  .sg-field textarea { min-height: 130px; resize: vertical; line-height: 1.55; }
+  .sg-field input::placeholder, .sg-field textarea::placeholder { color: var(--ink-40); font-weight: 500; }
+  .sg-field input:focus, .sg-field textarea:focus {
+    outline: none; border-color: var(--brand);
+    box-shadow: 0 0 0 4px rgba(0,158,220,.14);
+  }
+  .sg-form-foot {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .sg-form-note { margin: 0; flex: 1 1 220px; font-size: .78rem; font-weight: 600; color: var(--ink-40); line-height: 1.5; }
+
+  /* ══ FOOTER ══ */
+  footer {
+    padding: 100px 20px;
+    text-align: center;
+    background: var(--ink);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  footer .eyebrow { justify-content: center; color: var(--brand); }
+  footer .eyebrow::before { background: var(--brand); }
+  footer h2 {
+    font-family: var(--disp); font-weight: 900;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    letter-spacing: .03em; text-transform: uppercase;
+    margin: 0 0 30px; color: #fff;
+  }
+  .footer-contact {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 14px 36px;
+    margin-bottom: 30px;
+  }
+  .footer-contact a, .footer-contact span {
+    color: rgba(240,240,255,.72); text-decoration: none;
+    font-weight: 600; font-size: .92rem;
+    display: inline-flex; align-items: center; gap: 9px;
+    transition: color .25s ease;
+  }
+  .footer-contact a:hover { color: var(--brand); }
+  .footer-contact i { color: var(--brand); }
+  .footer-tax {
+    font-family: var(--disp);
+    font-size: .82rem; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(240,240,255,.5);
+    margin: 0 0 26px;
+  }
+  .footer-hash {
+    font-family: var(--disp); font-weight: 800;
+    font-size: 1rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--brand); margin: 0;
+  }
+
+  /* ══════════════════════════════════════════
+     MOBILE OPTIMIZATION
+     (touch + media queries only — desktop view
+     above 900px is completely untouched)
+     ══════════════════════════════════════════ */
+
+  /* Touch devices: hover "lift" effects can stick after a tap,
+     so transforms are neutralized (color feedback stays). */
+  @media (hover: none) and (pointer: coarse) {
+    .cta-btn:hover, .nav-btn:hover, .sg-sticky-btn:hover,
+    .way-card:hover, .logo-cell:hover, #sg-to-top:hover { transform: none; }
+    .cta-btn:hover i { transform: none; }
+    .way-link:hover i { transform: none; }
+    /* generous tap targets */
+    .way-link { padding: 8px 0; margin: -8px 0; }
+  }
+
+  /* ── TABLET ── */
+  @media (max-width: 900px) {
+    .stat-strip-inner { grid-template-columns: repeat(2, 1fr); gap: 34px 20px; }
+    .eac-wrap { grid-template-columns: 1fr; gap: 24px; }
+    .section { padding: 90px 6%; }
+    .sg-form-card { grid-template-columns: 1fr; gap: 28px; padding: 40px 36px; }
+    .sg-form-mail { margin-top: 0; }
+  }
+
+  /* ══ MOBIL (≤768px) ══
+     Tömör mobilnézet: a hosszú kártyalisták oldalra húzható sávokba kerülnek,
+     minden tartalom megmarad, de az oldal jóval rövidebb.
+     Az asztali (és a tabletes) nézetet ez a blokk nem érinti. */
+
+  /* „Húzd oldalra” jelzés — csak mobilon jelenik meg */
+  .sg-swipe-hint { display: none; }
+
+  /* ── PHONE ── */
+  @media (max-width: 768px) {
+    :root { --mpad: 20px; }
+    /* ha a Wix-doboz magasabb a tartalomnál, a lábléc alatt sem marad világos csík */
+    html { background: var(--ink); }
+
+    /* no fixed header on mobile → anchors can land closer */
+    .section { scroll-margin-top: 16px; }
+
+    /* fixed overlays + iOS safe area */
+    #sg-sticky-cta { padding: 0 12px calc(12px + env(safe-area-inset-bottom, 0px)); }
+    .sg-sticky-inner { max-width: 100%; padding: 8px 8px 8px 16px; gap: 10px; }
+    .sg-sticky-label { display: none; }
+    .sg-sticky-acct { font-size: .76rem; letter-spacing: .01em; }
+    .sg-sticky-btn { font-size: .7rem; padding: 12px 15px; min-height: 44px; }
+    #sg-to-top {
+      bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+      right: 14px; width: 44px; height: 44px;
+    }
+    #sg-toast {
+      bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+      max-width: calc(100vw - 32px);
+      white-space: normal; text-align: center;
+      padding: 10px 18px; font-size: .74rem; letter-spacing: .08em;
+      border-radius: 18px;
+    }
+
+    /* ── oldalra húzható kártyasávok (a képernyő széléig kifutnak) ── */
+    .duo-grid, .ways-grid, .logo-grid {
+      display: grid; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 84%;
+      gap: 12px; width: calc(100% + 2 * var(--mpad)); max-width: none;
+      margin-left: calc(-1 * var(--mpad)); margin-right: calc(-1 * var(--mpad));
+      padding: 6px var(--mpad) 18px;
+      overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory; scroll-padding: 0 var(--mpad); scrollbar-width: none;
+    }
+    .duo-grid::-webkit-scrollbar, .ways-grid::-webkit-scrollbar, .logo-grid::-webkit-scrollbar { display: none; }
+    .duo-grid > *, .ways-grid > *, .logo-grid > * { scroll-snap-align: start; }
+    /* a sávban lévő kártyák rögtön látszanak (oldalra húzáskor ne „villanjanak be”) */
+    .duo-grid > .sg-reveal, .ways-grid > .sg-reveal, .logo-grid > .sg-reveal { opacity: 1; transform: none; }
+    .sg-swipe-hint {
+      display: block; align-self: stretch; margin: -6px 0 0; text-align: right;
+      font-family: var(--disp); font-weight: 700; font-size: .56rem;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--ink-40);
+    }
+
+    /* hero */
+    .hero { padding: 54px var(--mpad) 44px; }
+    .hero::before { background-size: min(340px, 80vw); background-position: center 30%; }
+    .hero .eyebrow { font-size: .58rem; letter-spacing: .22em; gap: 10px; margin-bottom: 12px; }
+    .hero .eyebrow::before, .hero .eyebrow::after { width: 16px; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 12.5vw, 3.6rem);
+      line-height: 1; text-shadow: 0 10px 26px rgba(0,86,120,.3);
+    }
+    .hero .hero-sub { margin-top: 14px; max-width: 40ch; font-size: .94rem; line-height: 1.55; }
+    .hero .hero-ctas { margin-top: 22px; width: 100%; max-width: 420px; gap: 10px; }
+    .hero .hero-ctas .cta-btn { flex: 1 1 0; justify-content: center; min-height: 48px; padding: 13px 14px; font-size: .72rem; letter-spacing: .06em; gap: 8px; }
+
+    /* stat strip */
+    .stat-strip { padding: 26px var(--mpad) 28px; }
+    .stat-strip-inner { gap: 20px 12px; }
+    .stat-item .num { font-size: clamp(1.7rem, 8vw, 2.2rem); }
+    .stat-item .lbl { font-size: .58rem; letter-spacing: .12em; margin-top: 6px; line-height: 1.45; }
+
+    /* nav — egy oldalra húzható sor a négy egymás alatti gomb helyett */
+    .nav-wrapper { padding: 14px 0 16px; }
+    .nav-buttons {
+      display: flex; gap: 8px; max-width: none;
+      overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity; scroll-padding: 0 var(--mpad); scrollbar-width: none;
+      padding: 4px var(--mpad) 12px;
+    }
+    .nav-buttons::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      flex: 0 0 auto; scroll-snap-align: start; white-space: nowrap;
+      padding: 11px 16px; min-height: 44px; gap: 8px;
+      font-size: .66rem; letter-spacing: .08em;
+      box-shadow: 0 6px 16px rgba(35,31,32,.06);
+    }
+    .nav-btn i { font-size: .9rem; }
+
+    /* sections + type */
+    .section { padding: 40px var(--mpad) 44px; }
+    .eyebrow { font-size: .6rem; letter-spacing: .22em; gap: 10px; margin-bottom: 10px; }
+    .eyebrow::before { width: 18px; }
+    .section-title { font-size: clamp(1.3rem, 6.6vw, 2.1rem); line-height: 1.08; margin-bottom: 10px; overflow-wrap: break-word; }
+    .section-lead { margin-bottom: 22px; font-size: .92rem; line-height: 1.55; }
+    .cta-btn { font-size: .78rem; padding: 14px 22px; min-height: 48px; }
+    /* a „FELELŐSSÉGVÁLLALÁS” hosszú szó: ez a cím a képernyővel együtt skálázódik */
+    #cegek .section-title:not([style*="font-size"]) { font-size: clamp(1.1rem, 6.2vw, 2.1rem); }
+    /* a Vállalatoknak rész második, kisebb címe (inline méretét felülírjuk) */
+    #cegek .section-title[style*="font-size"] { font-size: clamp(1.15rem, 5.4vw, 1.5rem) !important; }
+
+    /* benefit ladder — tömörebb lépcső */
+    .ladder { margin-bottom: 34px; }
+    .ladder-item { padding: 10px 6px 10px 22px; gap: 10px; align-items: flex-start; }
+    .ladder-item::before { top: 16px; transform: none; }
+    .ladder-item i { font-size: .9rem; width: 20px; margin-top: 3px; }
+    .ladder-item .txt { font-size: .86rem; line-height: 1.45; }
+    .ladder-note { padding: 10px 6px 0 22px; font-size: .56rem; letter-spacing: .14em; line-height: 1.6; }
+
+    /* adókedvezmény-kártyák (sáv) */
+    .duo-grid { margin-top: 16px !important; }
+    .tax-card { padding: 24px 18px; border-radius: 18px; box-shadow: 0 6px 18px rgba(35,31,32,.06); }
+    .tax-card.best { box-shadow: 0 0 0 1px rgba(0,158,220,.15), 0 8px 20px rgba(0,158,220,.12); }
+    .tax-card .pct { font-size: 2.6rem; }
+    .tax-card .pct-lbl { margin: 6px 0 12px; font-size: .6rem; letter-spacing: .18em; }
+    .tax-card h3 { font-size: .9rem; line-height: 1.3; margin-bottom: 8px; }
+    .tax-card p { font-size: .86rem; line-height: 1.5; }
+    .legal-note { margin-top: 8px; font-size: .7rem; line-height: 1.5; }
+
+    /* számlaszám-panel */
+    .acct-panel { width: 100%; max-width: 440px; padding: 20px 14px 18px; border-radius: 18px; margin-top: 28px; gap: 6px; }
+    .acct-panel .acct-label { font-size: .6rem; letter-spacing: .24em; }
+    .acct-panel .acct-number { font-size: clamp(.9rem, 4.9vw, 1.25rem); letter-spacing: .01em; }
+    .acct-panel .acct-owner { font-size: .74rem; }
+    .acct-panel .copy-hint { font-size: .56rem; letter-spacing: .14em; }
+
+    /* info-sávok: ikon balra, szöveg mellette */
+    .info-band { margin-top: 18px; padding: 16px; gap: 12px; border-radius: 16px; flex-direction: row; }
+    .info-band i { margin-top: 2px; font-size: 1.1rem; }
+    .info-band h4 { font-size: .8rem; line-height: 1.35; margin-bottom: 4px; }
+    .info-band p { font-size: .84rem; line-height: 1.5; }
+
+    /* ÉAC */
+    .eac-wrap { gap: 18px; }
+    .subject-tags { gap: 6px; margin-bottom: 14px; }
+    .subject-tag { font-size: .56rem; letter-spacing: .1em; padding: 6px 11px; }
+    .eac-text p { font-size: .88rem; line-height: 1.55; margin-bottom: 12px; }
+    .eac-text p:last-of-type { margin-bottom: 18px; }
+    .eac-text .cta-btn { width: 100%; justify-content: center; }
+    .eac-side { padding: 20px 18px; border-radius: 18px; box-shadow: 0 12px 30px rgba(0,158,220,.2); }
+    .eac-side .big { font-size: 2.5rem; }
+    .eac-side .big-lbl { margin: 6px 0 10px; font-size: .62rem; letter-spacing: .16em; }
+    .eac-side li { font-size: .84rem; line-height: 1.45; padding: 8px 0 8px 22px; }
+
+    /* szülőknek — három lehetőség (sáv) */
+    .way-card { padding: 22px 18px; border-radius: 18px; box-shadow: 0 6px 18px rgba(35,31,32,.06); }
+    .way-card .icon { width: 44px; height: 44px; font-size: 1.1rem; margin-bottom: 14px; border-radius: 12px; }
+    .way-card h3 { font-size: .95rem; margin-bottom: 8px; }
+    .way-card p { font-size: .86rem; line-height: 1.5; margin-bottom: 14px; }
+
+    /* támogatók — logók két sorban, oldalra húzva (egyszerre ~3 oszlop látszik) */
+    .thanks-quote { margin-bottom: 20px; font-size: .9rem; line-height: 1.65; }
+    .logo-grid { grid-template-rows: repeat(2, auto); grid-auto-columns: 30%; gap: 10px; }
+    .logo-cell { height: 76px; border-radius: 14px; padding: 10px 12px; box-shadow: 0 6px 16px rgba(35,31,32,.05); }
+    .logo-cell img { max-height: 48px; }
+
+    /* kapcsolat-sáv */
+    .contact-band { padding: 28px 18px; border-radius: 18px; margin-top: 30px; box-shadow: 0 14px 34px rgba(0,158,220,.2); }
+    .contact-band h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .contact-band p { font-size: .88rem; line-height: 1.5; margin-bottom: 18px; }
+    .contact-band .cta-btn {
+      width: 100%; justify-content: center;
+      font-size: .74rem; letter-spacing: .03em; padding: 14px 12px;
+    }
+
+    /* kapcsolati űrlapok */
+    .sg-form-card { margin-top: 30px; padding: 24px 18px; gap: 18px; border-radius: 18px; box-shadow: 0 8px 22px rgba(35,31,32,.07); }
+    .sg-form-intro h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .sg-form-intro p { font-size: .88rem; line-height: 1.5; margin-bottom: 12px; }
+    .sg-form-mail { font-size: .84rem; }
+    .sg-form { grid-template-columns: 1fr; gap: 12px; }
+    .sg-field label { font-size: .6rem; letter-spacing: .14em; }
+    .sg-field input, .sg-field textarea { padding: 12px 14px; border-radius: 12px; }
+    .sg-field textarea { min-height: 110px; }
+    .sg-form-foot .cta-btn { width: 100%; justify-content: center; }
+    .sg-form-note { font-size: .72rem; }
+
+    /* footer — alul hely marad a lebegő számlaszám-sávnak, hogy ne takarjon ki semmit */
+    footer { padding: 36px var(--mpad) calc(36px + 72px + env(safe-area-inset-bottom, 0px)); }
+    footer h2 { font-size: 1.3rem; margin-bottom: 16px; }
+    .footer-contact { flex-direction: column; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-contact a, .footer-contact span { font-size: .84rem; }
+    .footer-tax { font-size: .66rem; letter-spacing: .12em; margin-bottom: 12px; }
+    .footer-hash { font-size: .84rem; }
+  }
+
+  /* ── SMALL PHONES ── */
+  @media (max-width: 420px) {
+    :root { --mpad: 16px; }
+    .hero { padding: 48px var(--mpad) 40px; }
+    .section { padding: 36px var(--mpad) 40px; }
+    .stat-item .num { font-size: 1.7rem; }
+    .duo-grid, .ways-grid { grid-auto-columns: 88%; }
+    .acct-panel .acct-number { font-size: .94rem; }
+    .sg-sticky-acct { font-size: .68rem; }
+    .sg-sticky-btn { font-size: .64rem; padding: 12px 12px; }
+    .contact-band .cta-btn { font-size: .7rem; }
+  }
+
+  /* ── VERY SMALL (≤360px) ── */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 2rem; }
+    .acct-panel .acct-number { font-size: .86rem; }
+    .sg-sticky-inner { padding: 7px 7px 7px 12px; gap: 8px; }
+    .sg-sticky-acct { font-size: .62rem; }
+    .contact-band .cta-btn { font-size: .64rem; gap: 8px; }
+    .eac-text .cta-btn { font-size: .66rem; letter-spacing: .04em; padding: 14px 12px; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── FIXED OVERLAYS ── -->
+<div id="sg-progress-bar" aria-hidden="true"></div>
+
+<div id="sg-toast" role="status" aria-live="polite">
+  <i class="fas fa-check" aria-hidden="true"></i>
+  <span>Számlaszám másolva!</span>
+</div>
+
+<div id="sg-sticky-cta" aria-hidden="true">
+  <div class="sg-sticky-inner">
+    <span class="sg-sticky-label">Számlaszám</span>
+    <button class="sg-sticky-acct" id="sg-sticky-acct-btn" aria-label="Számlaszám másolása vágólapra">12010556-00144764-00100003</button>
+    <a href="mailto:sandor.tolnai@studiumgenerale.hu" class="sg-sticky-btn">
+      <span>Írjon nekünk</span>
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>
+
+<button id="sg-to-top" aria-label="Vissza az oldal tetejére">
+  <i class="fas fa-chevron-up" aria-hidden="true"></i>
+</button>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<header class="hero sg-animate">
+  <p class="eyebrow sg-hero-el" style="--sg-delay:.15s">Studium Generale Alapítvány</p>
+  <h1 class="sg-hero-el" style="--sg-delay:.3s">Támogatás</h1>
+  <p class="hero-sub sg-hero-el" style="--sg-delay:.48s">
+    Az oktatásunk a diákok számára teljesen ingyenes — és az is marad.
+    Ehhez kérjük vállalatok, szülők és magánszemélyek támogatását.
+  </p>
+  <div class="hero-ctas sg-hero-el" style="--sg-delay:.66s">
+    <a class="cta-btn" href="#cegek">
+      <span>Vállalatoknak</span>
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+    <a class="cta-btn ghost" href="#szulok">
+      <span>Szülőknek</span>
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</header>
+
+<!-- ── STAT STRIP ── -->
+<div class="stat-strip">
+  <div class="stat-strip-inner">
+    <div class="stat-item sg-reveal" style="--sg-delay:.02s"><div class="num">0 Ft</div><div class="lbl">Az oktatásunk ára</div></div>
+    <div class="stat-item sg-reveal" style="--sg-delay:.1s"><div class="num">100</div><div class="lbl">Diák ingyenes nyári tábora</div></div>
+    <div class="stat-item sg-reveal" style="--sg-delay:.18s"><div class="num">1500+</div><div class="lbl">Diák a próbaérettségin</div></div>
+    <div class="stat-item sg-reveal" style="--sg-delay:.26s"><div class="num">40%</div><div class="lbl">Elérhető adókedvezmény</div></div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="nav-wrapper" aria-label="Oldalon belüli navigáció">
+  <div class="nav-buttons">
+    <a href="#cegek" class="nav-btn"><i class="fas fa-building" aria-hidden="true"></i><span>Vállalatoknak</span></a>
+    <a href="#eac" class="nav-btn"><i class="fas fa-people-group" aria-hidden="true"></i><span>Érettségizik a Cég!</span></a>
+    <a href="#szulok" class="nav-btn"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i><span>Szülőknek</span></a>
+    <a href="#koszonet" class="nav-btn"><i class="fas fa-award" aria-hidden="true"></i><span>Támogatóink</span></a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     VÁLLALATOKNAK
+══════════════════════════════ -->
+<section id="cegek" class="section">
+  <p class="eyebrow sg-reveal">Vállalatoknak</p>
+  <h2 class="section-title sg-reveal" style="--sg-delay:.06s">Társadalmi felelősségvállalás, <span class="highlight">ami látszik</span></h2>
+  <p class="section-lead sg-reveal" style="--sg-delay:.1s">
+    A Studium Generale támogatása — közhasznú alapítvány lévén — remek lehetőséget nyújt
+    minden vállalat számára a társadalmi felelősségvállalásra. A támogatás összegétől függően
+    egyéni csomagokat állítunk össze partnereinknek.
+  </p>
+
+  <!-- Partner benefit ladder (ascending by support level) -->
+  <div class="ladder sg-reveal" style="--sg-delay:.14s">
+    <div class="ladder-item"><i class="fas fa-globe" aria-hidden="true"></i><span class="txt">Megjelenés a honlapunkon</span></div>
+    <div class="ladder-item"><i class="fab fa-facebook" aria-hidden="true"></i><span class="txt">Megjelenés a Facebook oldalunkon</span></div>
+    <div class="ladder-item"><i class="fas fa-briefcase" aria-hidden="true"></i><span class="txt">Állásajánlatok közvetítése a Studium Generale 150 fős tagságának</span></div>
+    <div class="ladder-item"><i class="fas fa-bullhorn" aria-hidden="true"></i><span class="txt">Szóróanyagok terjesztése a hétvégi tanításokon</span></div>
+    <div class="ladder-item"><i class="fas fa-store" aria-hidden="true"></i><span class="txt">Standolási lehetőség az Egyetemi Orientációs Napon</span></div>
+    <div class="ladder-item"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="txt">Standolási lehetőség az országos Nyílt Próbaérettségi Napon</span></div>
+    <div class="ladder-item top"><i class="fas fa-crown" aria-hidden="true"></i><span class="txt">Főbb eseményeink, táboraink főszponzori címe</span></div>
+    <div class="ladder-note">A lehetőségek a támogatás mértékének függvényében bővülnek</div>
+  </div>
+
+  <p class="eyebrow sg-reveal">Adókedvezmény</p>
+  <h2 class="section-title sg-reveal" style="--sg-delay:.06s;font-size:clamp(1.6rem,3.6vw,2.4rem);">A támogatás az <span class="highlight">adóalapot is csökkenti</span></h2>
+
+  <div class="duo-grid" style="margin-top:40px;">
+    <div class="tax-card best sg-reveal" style="--sg-delay:.05s">
+      <div class="pct">40%</div>
+      <div class="pct-lbl">Adókedvezmény</div>
+      <h3>Tartós adományozás</h3>
+      <p>Legalább 3 évre szóló adományozási vállalás esetén szerződést kötünk a vállalattal,
+         amely így az adomány 40%-ának megfelelő adókedvezményt vehet igénybe.</p>
+    </div>
+    <div class="tax-card sg-reveal" style="--sg-delay:.16s">
+      <div class="pct">20%</div>
+      <div class="pct-lbl">Adókedvezmény</div>
+      <h3>Egyszeri / rövidebb támogatás</h3>
+      <p>Rövidebb vagy nem meghatározott időtartamú adományozás esetén külön szerződés nélkül
+         a cég a támogatás mértékének 20%-os adókedvezményét veheti igénybe.</p>
+    </div>
+  </div>
+  <p class="sg-swipe-hint" aria-hidden="true">Húzza oldalra →</p>
+  <p class="legal-note sg-reveal">A társasági adóról és az osztalékadóról szóló 1996. évi LXXXI. törvény [Tao. tv.] §7, z pontjának előírásai szerint.</p>
+
+  <!-- Bank account — signature copy interaction -->
+  <div class="acct-panel sg-reveal" style="--sg-delay:.1s" aria-label="Studium Generale Alapítvány számlaszáma">
+    <span class="acct-label">Számlaszámunk</span>
+    <strong class="acct-number" id="sg-acct-main" role="button" tabindex="0" aria-label="Kattintson a számlaszám másolásához">12010556&#8209;00144764&#8209;00100003</strong>
+    <span class="acct-owner">Studium Generale Alapítvány</span>
+    <span class="copy-hint">Kattintson a másoláshoz</span>
+  </div>
+
+  <div class="info-band sg-reveal" style="--sg-delay:.08s">
+    <i class="fas fa-gift" aria-hidden="true"></i>
+    <div>
+      <h4>Terméktámogatást is örömmel fogadunk</h4>
+      <p>Táboraink, nyilvános programjaink és rendezvényeink során tombolán és díjkiosztókon
+         a legszerencsésebb, legügyesebb, legjobban teljesítő diákjainkat partnereink
+         terméktámogatásának köszönhetően jutalmazhatjuk. Cserébe — az anyagi támogatáshoz
+         hasonlóan — megjelenést és szóróanyag-terjesztést biztosítunk.</p>
+    </div>
+  </div>
+
+  <!-- Általános vállalati kapcsolatfelvétel → sandor.tolnai@studiumgenerale.hu -->
+  <div class="sg-form-card sg-reveal" id="kapcsolat" style="--sg-delay:.08s">
+    <div class="sg-form-intro">
+      <p class="eyebrow">Kapcsolatfelvétel</p>
+      <h3>Együttműködne <span class="highlight">velünk?</span></h3>
+      <p>Ha együtt szeretne működni velünk, itt kereshet meg minket. Írja meg, milyen
+         támogatásban gondolkodik, és hamarosan felvesszük Önnel a kapcsolatot.</p>
+      <a class="sg-form-mail" href="mailto:sandor.tolnai@studiumgenerale.hu">
+        <i class="fas fa-envelope" aria-hidden="true"></i>sandor.tolnai@studiumgenerale.hu
+      </a>
+    </div>
+    <form class="sg-form" data-to="sandor.tolnai@studiumgenerale.hu" data-subject="Vállalati együttműködés" novalidate>
+      <div class="sg-field">
+        <label for="cf-nev">Név <span class="req">*</span></label>
+        <input id="cf-nev" name="Név" type="text" autocomplete="name" required>
+      </div>
+      <div class="sg-field">
+        <label for="cf-ceg">Vállalat</label>
+        <input id="cf-ceg" name="Vállalat" type="text" autocomplete="organization">
+      </div>
+      <div class="sg-field">
+        <label for="cf-email">E-mail <span class="req">*</span></label>
+        <input id="cf-email" name="E-mail" type="email" autocomplete="email" required>
+      </div>
+      <div class="sg-field">
+        <label for="cf-tel">Telefonszám</label>
+        <input id="cf-tel" name="Telefon" type="tel" autocomplete="tel">
+      </div>
+      <div class="sg-field full">
+        <label for="cf-uzenet">Üzenet <span class="req">*</span></label>
+        <textarea id="cf-uzenet" name="Üzenet" required></textarea>
+      </div>
+      <div class="sg-form-foot">
+        <button type="submit" class="cta-btn"><span>Üzenet küldése</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        <p class="sg-form-note">A gomb megnyitja levelezőprogramját a kitöltött üzenettel — onnan egy kattintással elküldheti.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     ÉRETTSÉGIZIK A CÉG!
+══════════════════════════════ -->
+<section id="eac" class="section alt">
+  <p class="eyebrow sg-reveal">Csapatépítő vállalatoknak</p>
+  <h2 class="section-title sg-reveal" style="--sg-delay:.06s">Érettségizik a <span class="highlight">Cég!</span></h2>
+  <p class="section-lead sg-reveal" style="--sg-delay:.1s">
+    A megszokottól eltérő csapatépítő program, ahol a vállalati csapatok újra padba ülnek —
+    és közben 100 diák ingyenes táborozását teszik lehetővé.
+  </p>
+
+  <div class="eac-wrap">
+    <div class="eac-text sg-reveal" style="--sg-delay:.08s">
+      <div class="subject-tags">
+        <span class="subject-tag mat">Matematika</span>
+        <span class="subject-tag tor">Történelem</span>
+        <span class="subject-tag kog">Közgazdaságtan</span>
+      </div>
+      <p>Az ÉAC minden évben nagy népszerűségnek örvend a résztvevők körében, sokszínű
+         programjainak hála. A változatos csapatépítő játékok és koncepciók, illetve a
+         játékmesterek és segítőik egyaránt azt a célt szolgálják, hogy a résztvevő csapatok
+         új élményben részesüljenek, és összemérjék ismereteiket az egyes érettségi tárgyakban.</p>
+      <p>Idén is felejthetetlen élményben volt része a bennünket támogató vállalatok
+         csapatainak — köszönjük az elmúlt években megjelent csapatoknak a részvételt és azt,
+         hogy hozzájárultak az érettségiző diákok segítéséhez. Reméljük, minél többükkel
+         találkozunk 2026-ban is!</p>
+      <div>
+        <a class="cta-btn" href="#eac-kapcsolat">
+          <span>Jelentkezés / érdeklődés</span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+    <div class="eac-side sg-reveal" style="--sg-delay:.18s">
+      <div class="big">100</div>
+      <div class="big-lbl">Diák ingyenes Nyári Tábora</div>
+      <ul>
+        <li>A részvételi díj teljes egészében a Nyári Táborunkat támogatja</li>
+        <li>Intenzív érettségi felkészítés egy teljes héten át</li>
+        <li>Izgalmas közösségi programok a diákoknak</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ÉAC vállalati érdeklődés → events@studiumgenerale.hu -->
+  <div class="sg-form-card on-alt sg-reveal" id="eac-kapcsolat" style="--sg-delay:.08s">
+    <div class="sg-form-intro">
+      <p class="eyebrow">ÉAC — Érdeklődés</p>
+      <h3>Több infóra <span class="highlight">van szüksége?</span></h3>
+      <p>Ha többet szeretne megtudni az Érettségizik a Cég! programról, itt kereshet meg
+         minket. Szívesen válaszolunk minden kérdésére.</p>
+      <a class="sg-form-mail" href="mailto:events@studiumgenerale.hu">
+        <i class="fas fa-envelope" aria-hidden="true"></i>events@studiumgenerale.hu
+      </a>
+    </div>
+    <form class="sg-form" data-to="events@studiumgenerale.hu" data-subject="Érettségizik a Cég! – érdeklődés" novalidate>
+      <div class="sg-field">
+        <label for="ef-nev">Név <span class="req">*</span></label>
+        <input id="ef-nev" name="Név" type="text" autocomplete="name" required>
+      </div>
+      <div class="sg-field">
+        <label for="ef-ceg">Vállalat</label>
+        <input id="ef-ceg" name="Vállalat" type="text" autocomplete="organization">
+      </div>
+      <div class="sg-field">
+        <label for="ef-email">E-mail <span class="req">*</span></label>
+        <input id="ef-email" name="E-mail" type="email" autocomplete="email" required>
+      </div>
+      <div class="sg-field">
+        <label for="ef-tel">Telefonszám</label>
+        <input id="ef-tel" name="Telefon" type="tel" autocomplete="tel">
+      </div>
+      <div class="sg-field full">
+        <label for="ef-uzenet">Üzenet <span class="req">*</span></label>
+        <textarea id="ef-uzenet" name="Üzenet" required></textarea>
+      </div>
+      <div class="sg-form-foot">
+        <button type="submit" class="cta-btn"><span>Üzenet küldése</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        <p class="sg-form-note">A gomb megnyitja levelezőprogramját a kitöltött üzenettel — onnan egy kattintással elküldheti.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SZÜLŐKNEK
+══════════════════════════════ -->
+<section id="szulok" class="section">
+  <p class="eyebrow sg-reveal">Szülőknek</p>
+  <h2 class="section-title sg-reveal" style="--sg-delay:.06s">Így támogathatja <span class="highlight">gyermeke felkészülését</span></h2>
+  <p class="section-lead sg-reveal" style="--sg-delay:.1s">
+    Ahhoz, hogy az oktatás ingyenes maradhasson a diákok számára, magánszemélyek
+    támogatására is szükségünk van — ennek több egyszerű módja is van.
+  </p>
+
+  <div class="ways-grid">
+    <div class="way-card sg-reveal" style="--sg-delay:.05s">
+      <div class="icon"><i class="fas fa-percent" aria-hidden="true"></i></div>
+      <h3>Adója 1%-a</h3>
+      <p>Legnagyobb bevételi forrásunk az adó 1%. Az adóbevallással együtt rendelkezhet
+         adója 1%-áról — ez Önnek semmibe sem kerül, diákjainknak viszont mindent jelent.
+         Adószámunk: <strong>19669814-1-43</strong></p>
+      <a class="way-link" href="https://eszja.nav.gov.hu/app/login/#login" target="_blank" rel="noopener">
+        <span>Felajánlás indítása</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="way-card sg-reveal" style="--sg-delay:.14s">
+      <div class="icon"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i></div>
+      <h3>Közvetlen adomány</h3>
+      <p>Bármilyen összegű adományt hálásan fogadunk bankszámlánkra, amelyet táboraink,
+         programjaink és rendezvényeink megvalósítására, valamint működési költségeinkre
+         fordítunk.</p>
+      <a class="way-link" href="#cegek">
+        <span>Számlaszámunk</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="way-card sg-reveal" style="--sg-delay:.23s">
+      <div class="icon"><i class="fas fa-book" aria-hidden="true"></i></div>
+      <h3>Kiadványaink</h3>
+      <p>Saját szerkesztésű érettségi felkészítő kiadványainkhoz támogatás fejében juthat
+         hozzá gyermeke — így a felkészülést és a szervezet működését egyszerre segíti.</p>
+      <a class="way-link" href="https://www.studiumgenerale.hu/kiadvanyok/" target="_blank" rel="noopener">
+        <span>Kiadványaink</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <p class="sg-swipe-hint" aria-hidden="true">Húzza oldalra →</p>
+
+  <div class="info-band sg-reveal" style="--sg-delay:.1s">
+    <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+    <div>
+      <h4>Szülői levelezőlista</h4>
+      <p>Iratkozzon fel szülői levelezőlistánkra: szeptembertől augusztusig ismertetjük a
+         felvételi rendszer működését, a pontszámítást, a nyelvvizsgákat, a kollégiumi és
+         albérleti lehetőségeket — minden fontos tudnivalót tömören és érthetően, hogy
+         segítséget tudjon nyújtani gyermekének az érettségi stresszes időszakában.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     KÖSZÖNETNYILVÁNÍTÁS ÉS TÁMOGATÓINK
+══════════════════════════════ -->
+<section id="koszonet" class="section alt">
+  <p class="eyebrow sg-reveal">Köszönetnyilvánítás</p>
+  <h2 class="section-title sg-reveal" style="--sg-delay:.06s">Köszönjük <span class="highlight">támogatóinknak</span></h2>
+
+  <p class="thanks-quote sg-reveal" style="--sg-delay:.1s">
+    <span class="q-mark">&bdquo;</span>A Studium Generale Alapítvány, azon belül is a Studium Generale
+    Diákszervezet aktív tagsága ezúton is köszöni minden kedves támogatójának, hogy hozzásegít
+    minket céljaink eléréséhez. Az Önöktől kapott összeget hátrányos helyzetű középiskolások
+    felsőoktatásba való bejutásának segítésére fordítjuk.<span class="q-mark">&rdquo;</span>
+  </p>
+
+  <!-- ═══ TÁMOGATÓI LOGÓK (68 db) ═══
+       Új logó hozzáadása: másolj le egy sort, és cseréld ki benne a képlinket.
+       Az alt="" helyére érdemes beírni a cég nevét (pl. alt="OTP Bank"),
+       így a képernyőolvasók és a keresők is felismerik a támogatót. -->
+  <div class="logo-grid sg-reveal" style="--sg-delay:.14s">
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_18aaafab705741eabed43b80d48b41a8~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_3fe49ee8268a4024bb81492d3dcbf6b8~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_b1b1c42fb44745ce84ccde865cd71217~mv2.webp" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_2f458c1e4b1c497d8fbc13efe6ac8a46~mv2.avif" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_c75d03bab0434f2bb3286397c82401c7~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_5a59c23a11a34362991b6a325b4b95c7~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_db3b0ea2e14c41e1a3cd4953bd78c5fb~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_b01a2af5ff1c453b9afa954b77c7eaee~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_6cf2cffc51184f3ea789229ac10cd8c7~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_978950df86d4451baf1a6a0263982783~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_91d4e870f5fc4cdb8ab5f744975966e8~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_961ebd150fab43029145286c29b41d28~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_e3f36afcc00e4c50a235e58b4dbd80b4~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_2dffcb93239d4bfeb561cd00ac11d00a~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_2f00924b01bc4e7780d1b54230ef537f~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_382f72324c864ec2b5bac89a29fd5f6d~mv2.webp" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_abc8203b16d04a59a216ad537661aa4b~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_b4c768ba84354c94b6c9cf2f92cf9da6~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_d41f378c1e6b4ee98bb54d810c8dfb89~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_05b1ea6d39dd47a1ac7b0fdd9f380d4e~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_b552f138707b4cd3821ac09854991d3f~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_ce84db2538374c91a8fc15a4672fbdee~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_306e101c696b45f696bb0f85551e4e4a~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_c6914d2a4fb0415dab1f712cff8097cd~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_caa8cd66e4664280a457f6071abf5c5d~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_6ca7344926184b6ba8549e24b24225f3~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_adeedc5ff04644acaf16a214218f6c4e~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_0cf7807e5e1a4c308a84f126b52c9abe~mv2.webp" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/shapes/0790fb_83d85cb4d8e64ee99c389509a8033218.svg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_a2f338873c0c4bd5a314cbd7dba5cb96~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_b61835d5978d42fcb0e1d6e8241fd906~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_dc6cb2b2200d49b9a3f0960bca3d457e~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_3a0b3f452ea84afba76ccc15caf26c16~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_90f7decb32254e82bf79be909ccb213d~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_da2814b12a4b403f89a540d03026414d~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_8c63f3a171d94a0885d9160cfa71de7a~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_168d5f3660cd4320bb43e10afcfb4d7e~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_f5b1542d9e2c4589be4e4e38a99f8355~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_267e7db27f274cd0ae5a5631e0bf101e~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_7fdbfad623a343c8acfa3c40487c8fcb~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_e8c682b28fa5463aae67bb2e409f1a10~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_afdd64a91e36438087732f3600e54311~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_a5b8235cc83842d89de79e53a65774c4~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_56655a34d61c4ff181fce453803410cd~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_4fb19d6ffa2b4c7bb065f65141f549da~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_c10df0e932c84fac8f08a12751d8a315~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_82ce7d40aaa94259a1eedd09f8b6873f~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_e20e528095d9425998513752ec2bf4a6~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_0d7aa8207a454c939a205bef0f9ff779~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_01b8a3463c51470984607f350f1984e2~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_dc5ab6b8771f43b89578cb3c59d1a79e~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_fa0448e7f67744fc973d69821edee5a2~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_9fe255395ff14d30ae53fc5bec12d7c3~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_445dc9fe93c8412ebaf4520c1100fd8f~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_89f83701d8e744969cb402bef99ce2f8~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_9e6dbea66fd94862a03164ee1abc8bef~mv2.jpeg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_dc4b6ee779ac4370824f63ef695f5b4c~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_ff313d28c8904d56a3e7d0dc093f237b~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_1a5f81f78848436fb9ec352c8619cf5b~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_0040c1deb9e54278ab73b4f748d429b1~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_b6440d6a825c4e1e9451b5e849f82cab~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_a58dd608829c46f4bceb7a03221b84cd~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_092e4bbcc05e4a918114dfcbe1fba0a2~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_59809446f48041baaa15694fb7c141c3~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_09795cb530374a3d843699b13499e790~mv2.png" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_67e165d420a24779a27fb54a29c2513a~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_d52eebcead134038a9321fa24e797e31~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+    <div class="logo-cell"><img src="https://static.wixstatic.com/media/0790fb_d125322120bc4ce68fa8a656a259a6f4~mv2.jpg" alt="Támogatónk logója" decoding="async"></div>
+  </div>
+
+  <p class="sg-swipe-hint" aria-hidden="true">Húzza oldalra →</p>
+
+  <!-- Contact CTA -->
+  <div class="contact-band sg-reveal" style="--sg-delay:.1s">
+    <h3>Legyen Ön is a támogatónk!</h3>
+    <p>Akár vállalatként, akár magánszemélyként segítene, írjon nekünk —
+       minden támogatásból ingyenes felkészítés lesz.</p>
+    <a class="cta-btn" href="mailto:sandor.tolnai@studiumgenerale.hu">
+      <span>sandor.tolnai@studiumgenerale.hu</span>
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <p class="eyebrow sg-reveal">Segítség • Közösség • Fejlődés</p>
+  <h2 class="sg-reveal" style="--sg-delay:.08s">Studium Generale Alapítvány</h2>
+  <div class="footer-contact sg-reveal" style="--sg-delay:.16s">
+    <a href="tel:+3614825172"><i class="fas fa-phone" aria-hidden="true"></i>+36 (1) 482 5172</a>
+    <a href="mailto:info@studiumgenerale.hu"><i class="fas fa-envelope" aria-hidden="true"></i>info@studiumgenerale.hu</a>
+    <span><i class="fas fa-location-dot" aria-hidden="true"></i>1093 Budapest, Fővám tér 8., Fszt. 21.</span>
+  </div>
+  <p class="footer-tax sg-reveal" style="--sg-delay:.22s">Adószámunk: 19669814-1-43</p>
+  <p class="footer-hash sg-reveal" style="--sg-delay:.28s">#WeAreSG</p>
+</footer>
+
+<!-- ══════════════════════════════
+     SCRIPTS
+══════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  function pRM() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  function qs(sel, ctx)  { return (ctx || document).querySelector(sel); }
+  function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  var progressBar = qs('#sg-progress-bar');
+  var toast       = qs('#sg-toast');
+  var stickyCta   = qs('#sg-sticky-cta');
+  var toTopBtn    = qs('#sg-to-top');
+  var hero        = qs('.hero');
+
+  /* ── PROGRESS BAR ── */
+  if (progressBar) {
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      progressBar.style.width = docH > 0 ? (scrollTop / docH * 100) + '%' : '0%';
+    }, { passive: true });
+  }
+
+  /* ── SCROLL TO TOP ── */
+  if (toTopBtn) {
+    window.addEventListener('scroll', function () {
+      toTopBtn.classList.toggle('is-visible', window.pageYOffset > 420);
+    }, { passive: true });
+    toTopBtn.addEventListener('click', function () {
+      try { window.scrollTo({ top: 0, behavior: pRM() ? 'auto' : 'smooth' }); }
+      catch (e) { window.scrollTo(0, 0); }
+    });
+  }
+
+  /* ── TOAST ── */
+  var toastTimer = null;
+  function showToast(msg) {
+    if (!toast) return;
+    qs('span', toast).textContent = msg || 'Másolva!';
+    toast.classList.add('is-visible');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('is-visible'); }, 2600);
+  }
+
+  /* ── COPY ACCOUNT NUMBER ──
+     A Wix-beágyazásban a böngésző letilthatja a modern vágólap-API-t, ezért
+     hiba esetén a régi (execCommand) módszerrel másolunk. Mobilon a panel
+     felirata is visszajelez, mert a lebegő üzenet a Wix-dobozban a képernyőn
+     kívülre eshet. */
+  var copyHint = qs('.acct-panel .copy-hint');
+  var copyHintText = copyHint ? copyHint.textContent : '';
+  var copyHintTimer = null;
+  function copied() {
+    showToast('Számlaszám másolva!');
+    if (copyHint && window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+      copyHint.textContent = '✓ Számlaszám másolva';
+      if (copyHintTimer) clearTimeout(copyHintTimer);
+      copyHintTimer = setTimeout(function () { copyHint.textContent = copyHintText; }, 2600);
+    }
+  }
+  function legacyCopy(text, near) {
+    var ta = document.createElement('textarea');
+    var y = (near ? near.getBoundingClientRect().top : 0) + (window.pageYOffset || 0);
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:absolute;left:0;top:' + y + 'px;width:1px;height:1px;padding:0;border:0;opacity:0;font-size:16px;';
+    document.body.appendChild(ta);
+    try { ta.focus({ preventScroll: true }); } catch (e) { ta.focus(); }
+    ta.select();
+    try { ta.setSelectionRange(0, text.length); } catch (e) {}
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    if (ok) copied();
+  }
+  function copyAcct(el) {
+    var acct = '12010556-00144764-00100003';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(acct).then(copied, function () { legacyCopy(acct, el); });
+    } else {
+      legacyCopy(acct, el);
+    }
+  }
+  [qs('#sg-acct-main'), qs('#sg-sticky-acct-btn')].forEach(function (el) {
+    if (!el) return;
+    el.addEventListener('click', function () { copyAcct(el); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyAcct(el); }
+    });
+  });
+
+  /* ── STICKY CTA ── */
+  if (stickyCta && hero && 'IntersectionObserver' in window) {
+    var heroObs = new IntersectionObserver(function (entries) {
+      var visible = entries[0].isIntersecting;
+      stickyCta.classList.toggle('is-visible', !visible);
+      stickyCta.setAttribute('aria-hidden', visible ? 'true' : 'false');
+    }, { threshold: 0.08 });
+    heroObs.observe(hero);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  if ('IntersectionObserver' in window && !pRM()) {
+    var revObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    qsa('.sg-reveal').forEach(function (el) { revObs.observe(el); });
+  } else {
+    qsa('.sg-reveal').forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* ── ACTIVE NAV SECTION ── */
+  if ('IntersectionObserver' in window) {
+    var navObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = entry.target.id;
+        qsa('.nav-btn').forEach(function (b) { b.classList.remove('is-active'); });
+        var btn = qs('.nav-btn[href="#' + id + '"]');
+        if (btn) btn.classList.add('is-active');
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    ['cegek', 'eac', 'szulok', 'koszonet'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) navObs.observe(el);
+    });
+  }
+
+  /* ── SMOOTH SCROLL ── */
+  qsa('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var targetId = this.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      var target = qs(targetId);
+      if (!target) return;
+      e.preventDefault();
+      try { target.scrollIntoView({ behavior: pRM() ? 'auto' : 'smooth', block: 'start' }); }
+      catch (err) { target.scrollIntoView(true); }
+    });
+  });
+
+  /* ── KAPCSOLATI ŰRLAPOK ──
+     A Wix-beágyazásnak nincs szervere, ezért az űrlap a látogató levelezőprogramját
+     nyitja meg a kitöltött adatokkal (címzett: a form data-to attribútuma). */
+  qsa('.sg-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fields = qsa('input, textarea', form);
+      for (var i = 0; i < fields.length; i++) {
+        if (fields[i].value.trim) fields[i].value = fields[i].value.trim();
+        if (!fields[i].checkValidity()) { fields[i].reportValidity ? fields[i].reportValidity() : fields[i].focus(); return; }
+      }
+      var get = function (n) { var f = form.elements[n]; return f ? f.value : ''; };
+      var who = get('Vállalat') || get('Név');
+      var subject = form.getAttribute('data-subject') + (who ? ' – ' + who : '');
+      var body = get('Üzenet') + '\n\n——\n' +
+        'Név: ' + get('Név') + '\n' +
+        'Vállalat: ' + (get('Vállalat') || '–') + '\n' +
+        'E-mail: ' + get('E-mail') + '\n' +
+        'Telefon: ' + (get('Telefon') || '–') + '\n';
+      var a = document.createElement('a');
+      a.href = 'mailto:' + form.getAttribute('data-to') +
+        '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      showToast('Levelezőprogram megnyitva');
+    });
+  });
+
+  /* ── HIBÁS LOGÓ ELREJTÉSE ──
+     Ha egy képlink nem tölt be (pl. törölték a Wix médiatárból), a cella eltűnik,
+     így nem marad üres vagy törött képes doboz a rácsban. */
+  qsa('.logo-cell img').forEach(function (img) {
+    function hide() { if (img.parentNode) img.parentNode.style.display = 'none'; }
+    if (img.complete && img.naturalWidth === 0) hide();
+    else img.addEventListener('error', hide);
+  });
+
+})();
+</script>
+<script>
+/* Wix-doboz kitöltése: ha a HTML-beágyazás magasabb, mint az oldal tartalma (pl. más ablakszélességnél
+   vagy nagyításnál), a maradék helyet az utolsó szekció színe tölti ki – így nem marad fehér csík
+   a tartalom és a Wix lábléce között. Akkor is működik, ha a kódból törölted a láblécet. */
+(function () {
+  function opaque(c) {
+    var m = /rgba?\(([^)]+)\)/.exec(c || '');
+    if (!m) return false;
+    var p = m[1].split(',');
+    return p.length < 4 || parseFloat(p[3]) >= 0.95;
+  }
+  function colorOf(el) {
+    var cs = getComputedStyle(el);
+    if (opaque(cs.backgroundColor)) return cs.backgroundColor;
+    var stops = (cs.backgroundImage || '').match(/rgba?\([^)]*\)/g);   /* színátmenetnél az utolsó szín */
+    if (stops && opaque(stops[stops.length - 1])) return stops[stops.length - 1];
+    return '';
+  }
+  function fill() {
+    var blocks = [].filter.call(document.body.children, function (el) {
+      if (/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE|LINK)$/.test(el.tagName)) return false;
+      var cs = getComputedStyle(el);
+      return cs.display !== 'none' && cs.position !== 'fixed' && cs.position !== 'absolute' && el.offsetHeight > 0;
+    });
+    for (var el = blocks[blocks.length - 1]; el && el !== document.documentElement; el = el.parentElement) {
+      var c = colorOf(el);
+      if (c) { document.documentElement.style.backgroundColor = c; return; }
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fill); else fill();
+})();
+</script>
+
+</body>
+</html>
+</xmp>
+<script>
+(function () {
+  'use strict';
+  var frame = document.getElementById('sg-frame');
+  var source = document.getElementById('sg-src');
+  var MIN_W = 300, MAX_W = 2400;       /* a lap tördelési szélességének határai (px) */
+  var W0 = 0, H0 = 0, shown = false, timer = 0;
+
+  function doc() { try { return frame.contentDocument; } catch (e) { return null; } }
+  function box() { var de = document.documentElement; return { w: de.clientWidth, h: de.clientHeight }; }
+
+  /* a lap természetes magassága, ha W px szélesen tördelődik */
+  function natural(W) {
+    frame.style.width = W + 'px';
+    frame.style.height = '10px';
+    frame.offsetWidth;
+    var d = doc();
+    return d && d.documentElement ? d.documentElement.scrollHeight : 0;
+  }
+
+  /* a W0 szélességű, H0 magas lap ráigazítása a dobozra */
+  function place() {
+    if (!W0 || !H0) return;
+    var b = box(), sx = b.w / W0, sy = sx, fit = b.h / (H0 * sx);
+    if (Math.abs(fit - 1) < 0.02) sy = b.h / H0;   /* kerekítési különbség: láthatatlan igazítás */
+    else if (fit < 1) sx = sy = b.h / H0;          /* szélsőséges eset: a lap magasabb – kicsinyítés */
+    frame.style.width = W0 + 'px';
+    frame.style.height = H0 + 'px';
+    frame.style.left = Math.max(0, (b.w - W0 * sx) / 2) + 'px';
+    frame.style.transform = 'scale(' + sx + ',' + sy + ')';
+  }
+
+  /* az a legkisebb W, amelynél a lap még belefér a doboz arányába (magasság ≤ arány × W) */
+  function calibrate() {
+    var d = doc(), b = box();
+    if (!d || !d.body || !b.w || !b.h) return;
+    var R = b.h / b.w;
+    var W = Math.min(MAX_W, Math.max(MIN_W, b.w));      /* a doboz szélességéről indul: azonos méretnél mindig azonos eredmény */
+    var fits = 0, tall = 0, n, next;
+    for (var i = 0; i < 16; i++) {
+      n = natural(W);
+      if (n > R * W) { if (W > tall) tall = W; } else if (!fits || W < fits) fits = W;
+      if (fits && tall && fits - tall <= 1) break;
+      next = Math.min(MAX_W, Math.max(MIN_W, Math.round(n / R)));
+      if (fits && tall && (next <= tall || next >= fits)) next = Math.round((fits + tall) / 2);
+      if (next === W) break;
+      W = next;
+    }
+    W0 = fits || W;
+    H0 = natural(W0);
+    place();
+  }
+
+  /* ha a lap magassága időközben változott (betűtípus, kép, lenyíló tartalom), újrakalibrál */
+  function check() {
+    if (!W0) return;
+    var n = natural(W0);
+    if (Math.abs(n - H0) > 1) calibrate(); else place();
+  }
+
+  function show() {
+    if (shown) return;
+    shown = true;
+    frame.style.visibility = 'visible';
+  }
+
+  frame.addEventListener('load', function () {
+    var d = doc();
+    if (!d || !d.documentElement) { show(); return; }   /* tartalék: sima, skálázás nélküli megjelenítés */
+    if (d.URL !== 'about:srcdoc') return;               /* a kezdeti üres dokumentum (Firefox) */
+    try {
+      calibrate();
+      var bg = getComputedStyle(d.documentElement).backgroundColor;
+      if (bg && !/rgba\(.*,\s*0\)$/.test(bg) && bg !== 'transparent') document.documentElement.style.background = bg;
+      var ready = function () { try { check(); } catch (e) {} show(); };
+      if (d.fonts && d.fonts.ready) d.fonts.ready.then(ready, ready); else ready();
+      setTimeout(ready, 1500);
+      var t = 0, RO = d.defaultView.ResizeObserver;
+      if (RO) new RO(function () {
+        clearTimeout(t);
+        t = setTimeout(function () { try { check(); } catch (e) {} }, 120);
+      }).observe(d.body);
+    } catch (e) { show(); }
+  });
+
+  window.addEventListener('resize', function () {
+    try { place(); } catch (e) {}
+    clearTimeout(timer);
+    timer = setTimeout(function () { try { calibrate(); } catch (e) {} }, 200);
+  });
+
+  /* üzenetek továbbítása a Wix-oldal és a lap között (a Feladatok gomb opcionális Velo-kódjához) */
+  window.addEventListener('message', function (e) {
+    var inner = frame.contentWindow;
+    if (e.source === inner) { if (window.parent !== window) window.parent.postMessage(e.data, '*'); }
+    else if (e.source === window.parent && inner) inner.postMessage(e.data, '*');
+  });
+
+  setTimeout(show, 3000);                            /* biztonsági háló: a lap mindenképp megjelenik */
+  frame.srcdoc = source.textContent;
+})();
+</script>
+</body>
+</html>
